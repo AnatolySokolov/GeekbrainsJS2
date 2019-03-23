@@ -96,6 +96,11 @@
       // отчистка корзины
       this.list = [];
     }
+    countTotalCost() {
+      // подсчет общей стоимость корзины
+      let total = 0;
+      return this.list.forEach(item => total += item.price);
+    }
     render() {
       let listHtml = '';
       this.list.forEach(item => {
