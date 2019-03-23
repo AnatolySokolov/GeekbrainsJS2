@@ -99,7 +99,8 @@
     countTotalCost() {
       // подсчет общей стоимость корзины
       let total = 0;
-      return this.list.forEach(item => total += item.price);
+      this.list.forEach(item => total += item.price);
+      return total;
     }
     render() {
       let listHtml = '';
@@ -118,5 +119,5 @@
   const cart = new Cart();
   cart.add();
   cart.render();
-
+  alert('суммарная стоимость корзины: ' + cart.countTotalCost());
 })();
