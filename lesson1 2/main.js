@@ -40,12 +40,11 @@
     }
 
     render() {
-      let listHtml = '';
-      this.goods.forEach(good => {
+      const reducer = (acc, good) => {
         const goodItem = new GoodsItem(good.title, good.price);
-        listHtml += goodItem.render();
-      });
-      document.querySelector('.product__list').innerHTML = listHtml;
+        return acc + goodItem.render();
+      };
+      document.querySelector('.product__list').innerHTML = this.goods.reduce(reducer, '');
     }
   }
 
@@ -89,26 +88,27 @@
         {title: 'rebox zane', price: 250, imgUrl: 'img/cart__product2.jpg'}
       ];
     }
+
     remove() {
       // удаление товара из корзины
     }
+
     clear() {
       // отчистка корзины
       this.list = [];
     }
+
     countTotalCost() {
       // подсчет общей стоимость корзины
-      let total = 0;
-      this.list.forEach(item => total += item.price);
-      return total;
+      return this.list.reduce((acc, item) => acc + item.price, 0);
     }
+
     render() {
-      let listHtml = '';
-      this.list.forEach(item => {
+      const reducer = (acc, item) => {
         const cartItem = new CartItem(item.title, item.price, item.imgUrl);
-        listHtml += cartItem.render();
-      });
-      document.querySelector('.cart__list').innerHTML = listHtml;
+        return acc + cartItem.render();
+      };
+      document.querySelector('.cart__list').innerHTML = this.list.reduce(reducer, '');
     }
   }
 
