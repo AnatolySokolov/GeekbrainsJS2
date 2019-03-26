@@ -2,6 +2,19 @@
 
 (function () {
 
+  // const API_URL = 'http://localhost:3000/db.json';
+
+  const makeGETRequest = (cb) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://localhost:3000/data.json');
+    xhr.onreadystatechange = () => {
+      if(xhr.readyState === XMLHttpRequest.DONE) {
+        cb(xhr.responseText);
+      }
+    };
+    xhr.send();
+  };
+
   class GoodsItem {
     constructor(title, price) {
       this.title = title;
@@ -28,15 +41,19 @@
       this.goods = [];
     }
 
-    fetchGoods() {
-      this.goods = [
-        {title: 'mango people t-shirt1', price: 52},
-        {title: 'mango people t-shirt2', price: 52},
-        {title: 'mango people t-shirt3', price: 52},
-        {title: 'mango people t-shirt4', price: 52},
-        {title: 'mango people t-shirt5', price: 52},
-        {title: 'mango people t-shirt6', price: 52}
-      ];
+    fetchGoods(cb) {
+      // this.goods = [
+      //   {title: 'mango people t-shirt1', price: 52},
+      //   {title: 'mango people t-shirt2', price: 52},
+      //   {title: 'mango people t-shirt3', price: 52},
+      //   {title: 'mango people t-shirt4', price: 52},
+      //   {title: 'mango people t-shirt5', price: 52},
+      //   {title: 'mango people t-shirt6', price: 52}
+      // ];
+      makeGETRequest(goods => {
+        this.goods = JSON.parse(goods);
+        cb();
+      });
     }
 
     render() {
@@ -113,11 +130,12 @@
   }
 
   const list = new GoodList();
-  list.fetchGoods();
-  list.render();
+  // list.fetchGoods();
+  // list.render();
+  list.fetchGoods(() => list.render());
 
   const cart = new Cart();
   cart.add();
   cart.render();
-  alert('суммарная стоимость корзины: ' + cart.countTotalCost());
+  // alert('суммарная стоимость корзины: ' + cart.countTotalCost());
 })();
