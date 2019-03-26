@@ -2,15 +2,19 @@
 
 (function () {
 
-  const makeGETRequest = (cb) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'data.json');
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        cb(xhr.responseText);
-      }
-    };
-    xhr.send();
+  const URL = 'data.json';
+
+  const makeGETRequest = (url) => {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          resolve(xhr.responseText);
+        }
+      };
+      xhr.send();
+    });
   };
 
   class GoodsItem {
@@ -40,8 +44,8 @@
     }
 
     fetchGoods(cb) {
-      makeGETRequest(goods => {
-        this.goods = JSON.parse(goods);
+      makeGETRequest(URL).then((data) => {
+        this.goods = JSON.parse(data);
         cb();
       });
     }
@@ -122,8 +126,9 @@
   const list = new GoodList();
   list.fetchGoods(() => list.render());
 
+
   const cart = new Cart();
   cart.add();
   cart.render();
-  alert('суммарная стоимость корзины: ' + cart.countTotalCost());
+  // alert('суммарная стоимость корзины: ' + cart.countTotalCost());
 })();
