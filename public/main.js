@@ -19,7 +19,7 @@
     });
   };
 
-  const getId = (e) => {
+  const getId = e => {
     let target = e.target;
 
     while (target !== this) {
@@ -80,6 +80,9 @@
         .then((data) => {
           goods = JSON.parse(data);
           this.goods = goods;
+        })
+        .then(() => {
+          this.render();
           cb();
         });
     }
@@ -133,7 +136,7 @@
       const checkItem = this.list.some(item => item.productId === id);
       if (!checkItem) {
         goods.some(item => {
-          if(item.productId === id) {
+          if (item.productId === id) {
             this.list.push(item);
           }
         });
