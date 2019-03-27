@@ -108,7 +108,7 @@ class Hamburger {
 }
 
 const hamburger = new Hamburger('small', 'cheese');
-hamburger.addToppings('seasoning')
+hamburger.addToppings('seasoning');
 hamburger.addToppings('mayonnaise');
 console.log(hamburger);
 console.log(hamburger.calculateCalories());
