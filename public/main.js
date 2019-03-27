@@ -83,7 +83,8 @@
         })
         .then(() => {
           this.render();
-        });
+        })
+        .catch(error => console.log(error));
     }
 
     render() {
