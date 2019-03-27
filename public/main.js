@@ -75,7 +75,7 @@
       this.goods = [];
     }
 
-    fetchGoods(url, cb) {
+    fetchGoods(url) {
       makeGETRequest(url)
         .then((data) => {
           goods = JSON.parse(data);
@@ -83,7 +83,6 @@
         })
         .then(() => {
           this.render();
-          cb();
         });
     }
 
@@ -136,7 +135,7 @@
       const checkItem = this.list.some(item => item.productId === id);
       if (!checkItem) {
         goods.some(item => {
-          if (item.productId === id) {
+          if(item.productId === id) {
             this.list.push(item);
           }
         });
@@ -175,7 +174,7 @@
   }
 
   const list = new GoodList();
-  list.fetchGoods(DATA_URL, () => list.render());
+  list.fetchGoods(DATA_URL);
 
   const cart = new Cart();
   // alert('суммарная стоимость корзины: ' + cart.countTotalCost());
