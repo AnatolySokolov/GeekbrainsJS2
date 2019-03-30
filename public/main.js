@@ -133,9 +133,9 @@
 
     add(id) {
       // добваление товара в корзину по id-атрибуту
-      const checkItem = this.list.some(item => item.productId === id);
+      const checkItem = this.list.find(item => item.productId === id);
       if (!checkItem) {
-        goods.some(item => {
+        goods.find(item => {
           if(item.productId === id) {
             this.list.push(item);
           }
