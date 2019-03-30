@@ -5,18 +5,16 @@
   const DATA_URL = 'data.json';
   let goods = [];
 
-  const makeGETRequest = url => {
-    return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', url);
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          resolve(xhr.responseText);
-        }
-      };
-      xhr.onerror = () => reject(xhr.statusText);
-      xhr.send();
-    });
+  const sendRequest = url => {
+    return fetch(url)
+      .then(
+        response => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error('Network response was not ok.');
+        })
+      .catch(error => console.log(error.message));
   };
 
   const getId = e => {
@@ -76,15 +74,11 @@
     }
 
     fetchGoods(url) {
-      makeGETRequest(url)
-        .then((data) => {
-          goods = JSON.parse(data);
-          this.goods = goods;
-        })
-        .then(() => {
-          this.render();
-        })
-        .catch(error => console.log(error));
+      return sendRequest(url)
+        .then(data => {
+          goods = data;
+          this.goods = data;
+        });
     }
 
     render() {
@@ -136,7 +130,7 @@
       const checkItem = this.list.find(item => item.productId === id);
       if (!checkItem) {
         goods.find(item => {
-          if(item.productId === id) {
+          if (item.productId === id) {
             this.list.push(item);
           }
         });
@@ -175,7 +169,7 @@
   }
 
   const list = new GoodList();
-  list.fetchGoods(DATA_URL);
+  list.fetchGoods(DATA_URL).then(() => list.render());
 
   const cart = new Cart();
   // alert('суммарная стоимость корзины: ' + cart.countTotalCost());
