@@ -17,27 +17,26 @@
       .catch(error => console.log(error.message));
   };
 
-  const getId = e => {
-    let target = e.target;
+  const onAddToCartButtonClick = e => {
+    let id;
 
-    while (target !== this) {
-      if (target.hasAttribute('data-product-id')) {
-        return target.getAttribute('data-product-id');
-      }
-      target = target.parentNode;
+    if (e.target.classList.contains('item-card__cart')) {
+      id = e.target.dataset.productId;
+    } else if (e.target.classList.contains('item-card__cart-text')) {
+      id = e.target.parentElement.dataset.productId;
+    }
+    if (id) {
+      cart.add(id);
+      cart.render();
     }
   };
 
-  const onAddToCartButtonClick = e => {
-    const id = getId(e);
-    cart.add(id);
-    cart.render();
-  };
-
   const onDeleteButtonClick = e => {
-    const id = getId(e);
-    cart.remove(id);
-    cart.render();
+    if (e.target.classList.contains('cart__delete')) {
+      const id = e.target.dataset.productId;
+      cart.remove(id);
+      cart.render();
+    }
   };
 
   const onClearCartButtonClick = () => {
@@ -62,7 +61,7 @@
          <img class="item-card__img" src=${this.img} width="263" height="281" alt="mango people t-shirt">
        </a>
        <button class="item-card__cart" data-product-id=${this.id} type="button">
-        <span>Add to Cart</span>
+        <span class="item-card__cart-text">Add to Cart</span>
        </button>
     </li>`;
     }
