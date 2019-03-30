@@ -2,7 +2,7 @@
 
 (function () {
 
-  const DATA_URL = 'data.json';
+  const DATA_URL = 'data';
   let goods = [];
 
   const sendRequest = url => {
