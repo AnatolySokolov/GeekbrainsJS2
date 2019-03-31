@@ -55,5 +55,28 @@
       "imgUrl": "img/product__img9.jpg"
     }
   ],
-  "cart": []
+  "cart": [],
+  "feedback": [
+    {
+      "name": "IvanIvanov",
+      "phone": "+7(123)456-7890",
+      "email": "mymail@mail.ru",
+      "message": "test 1",
+      "id": 1
+    },
+    {
+      "name": "Петр Петров",
+      "phone": "+7(098)765-4321",
+      "email": "my.mail@mail.ru",
+      "message": "тест 2",
+      "id": 2
+    },
+    {
+      "name": "йцукен",
+      "phone": "+7(000)000-0000",
+      "email": "my-mail@mail.ru",
+      "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, facilis?",
+      "id": 3
+    }
+  ]
 }

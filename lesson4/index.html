@@ -6,22 +6,47 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <style>
-   body {
-     font-size: 20px;
-   }
+    body {
+      font-size: 20px;
+    }
   </style>
   <title>Lesson 4</title>
 </head>
 <body>
 <p class="input">Lorem: 'ipsum dolor. sit amet', cons'ectetur adipisicing elit. Aperiam dolore, dolorem dolores
-  eligendi magnam maxime officiis praesentium quo repellat saepe, soluta ullam, veniam? Culpa doloribus eaque eligendi inventore
-  ipsam 'iste' - iusto magni necessitatibus 'officia' quae quas qui: 'quibusdam! quidem' repellendus, sed sint, sunt unde
+  eligendi magnam maxime officiis praesentium quo repellat saepe, soluta ullam, veniam? Culpa doloribus eaque eligendi
+  inventore
+  ipsam 'iste' - iusto magni necessitatibus 'officia' quae quas qui: 'quibusdam! quidem' repellendus, sed sint, sunt
+  unde
   voluptates. Accusantium amet at autem '1bea'tae blanditiis debitis, deleniti distinctio dolorum eaque error eum hic
-  illo illum quae, quis. A, facere 'laudantium sdsds', - necessitatibus perspiciatis reiciendis sed suscipit vero. Consequuntur culpa
-  fuga pari'atur quam quidem quos 'sunt' voluptate! Consequuntur 'cupiditate sdsdsd 1234' - debitis, dolorem dolores, ducimus earum
+  illo illum quae, quis. A, facere 'laudantium sdsds', - necessitatibus perspiciatis reiciendis sed suscipit vero.
+  Consequuntur culpa
+  fuga pari'atur quam quidem quos 'sunt' voluptate! Consequuntur 'cupiditate sdsdsd 1234' - debitis, dolorem dolores,
+  ducimus earum
   eligendi esse eveniet: 'facilis illum? iusto magni' nulla pariatur, ratione: 'ut vero?'.</p>
 
 <p class="output"></p>
+
+<form id="feedback">
+  <p>
+    <label for="name">Ваше имя</label>
+    <input id="name" name="name" type="text" placeholder="Имя содержит только буквы"> <!--value="IvanIvanov"-->
+  </p>
+  <p>
+    <label for="phone">Телефон</label>
+    <input id="phone" name="phone" type="tel" placeholder="+7(000)000-0000"> <!--value="+7(000)000-0000"-->
+  </p>
+  <p>
+    <label for="email">Почтовый адрес</label>
+    <input id="email" name="email" type="email" placeholder="mymail@mail.ru"> <!--value="mymail@mail.ru"-->
+  </p>
+  <p>
+    <label for="message">Напишите сообщение</label>
+    <textarea name="message" id="message" cols="30" rows="10"></textarea>
+  </p>
+  <button type="submit">Отправить</button>
+</form>
 <script src="pattern.js"></script>
+<script src="task3.js"></script>
 </body>
 </html>
