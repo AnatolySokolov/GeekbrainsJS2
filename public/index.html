@@ -9,22 +9,36 @@
   <title>eShop</title>
 </head>
 <body>
-<header>
-  <div class="cart__container">
-    <button class="cart-button" type="button">Корзина</button>
-    <div class="cart__wrapper">
-      <ul class="cart__list"></ul>
-      <button class="cart__clear" id="clear-cart" type="button">Отчистить корзину</button>
-    </div>
-  </div>
-</header>
-<main>
-  <h2>Каталог товаров</h2>
-  <ul class="product__list"></ul>
-</main>
 
+<div id="app">
+  <header>
+    <div class="cart__container">
+      <button class="cart-button" type="button">Корзина</button>
+      <div class="cart__wrapper">
+        <ul class="cart__list"></ul>
+        <button class="cart__clear" id="clear-cart" type="button">Отчистить корзину</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <h2>Каталог товаров</h2>
+    <ul class="product__list">
+      <li class="product__item item-card" v-for="good in filteredGoods">
+        <a class="item-card__link" href="#">
+          <h3 class="item-card__item-title">{{good.title}}</h3>
+          <p class="item-card__price">{{good.price}}</p>
+          <p class="item-card__stars"></p>
+          <img class="item-card__img" :src="good.imgUrl" width="263" height="281" alt="mango people t-shirt">
+        </a>
+        <button class="item-card__cart" :data-product-id="good.productId" type="button">
+          <span class="item-card__cart-text">Add to Cart</span>
+        </button>
+      </li>
+    </ul>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 <script src="main.js"></script>
-<script src="onCartButtonClick.js"></script>
-<!--<script src="task3.js"></script>-->
 </body>
 </html>
