@@ -13,16 +13,35 @@
 <div id="app">
   <header>
     <div class="cart__container">
-      <button class="cart-button" type="button">Корзина</button>
-      <div class="cart__wrapper">
-        <ul class="cart__list"></ul>
-        <button class="cart__clear" id="clear-cart" type="button">Отчистить корзину</button>
+      <button class="cart-button" type="button" v-on:click="onCartButtonClick">Корзина</button>
+      <div class="cart__wrapper" v-if="cart.length != 0" >
+        <ul class="cart__list" v-on:click="onDeleteButtonClick">
+          <li class="cart__item" v-for="item in cart">
+            <a class="cart__link" href="#">
+              <div>
+                <h3 class="cart__title">{{item.title}}</h3>
+                <div class="cart__rating"></div>
+                <p class="cart__quantity-and-price">
+                  <span>1</span>
+                  <span class="cart__letter-decoration"> x </span>
+                  <span>$ {{item.price}}</span>
+                </p>
+              </div>
+              <img class="cart__img" :src="item.imgUrl" width="72" height="85" alt="#">
+            </a>
+            <button class="cart__delete" :data-product-id="item.productId" type="button">
+              <span class="visually-hidden">Delete the item from cart</span>
+            </button>
+          </li>
+        </ul>
+        <p>Итого: {{countTotalCost()}}</p>
+        <button class="cart__clear" type="button" v-on:click="clearCart">Отчистить корзину</button>
       </div>
     </div>
   </header>
   <main>
     <h2>Каталог товаров</h2>
-    <ul class="product__list">
+    <ul class="product__list" v-on:click="onAddToCartButtonClick">
       <li class="product__item item-card" v-for="good in filteredGoods">
         <a class="item-card__link" href="#">
           <h3 class="item-card__item-title">{{good.title}}</h3>
