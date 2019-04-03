@@ -45,7 +45,7 @@
   </header>
   <main>
     <h2>Каталог товаров</h2>
-    <ul class="product__list" v-on:click="onAddToCartButtonClick">
+    <ul class="product__list" v-if="filteredGoods.length != 0" v-on:click="onAddToCartButtonClick">
       <li class="product__item item-card" v-for="good in filteredGoods">
         <a class="item-card__link" href="#">
           <h3 class="item-card__item-title">{{good.title}}</h3>
@@ -58,6 +58,7 @@
         </button>
       </li>
     </ul>
+    <p v-else>Нет данных</p>
   </main>
 </div>
 
