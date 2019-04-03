@@ -12,9 +12,13 @@
 
 <div id="app">
   <header>
+    <div class="search">
+      <input name="search-text" type="text" v-model="searchLine">
+      <button type="button" v-on:click="onSearchButtonClick">Поиск</button>
+    </div>
     <div class="cart__container">
       <button class="cart-button" type="button" v-on:click="onCartButtonClick">Корзина</button>
-      <div class="cart__wrapper" v-if="cart.length != 0" >
+      <div class="cart__wrapper" v-if="cart.length != 0">
         <ul class="cart__list" v-on:click="onDeleteButtonClick">
           <li class="cart__item" v-for="item in cart">
             <a class="cart__link" href="#">

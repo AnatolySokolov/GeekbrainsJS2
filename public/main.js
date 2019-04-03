@@ -22,6 +22,10 @@ const app = new Vue({
           })
         .catch(error => console.log(error.message));
     },
+    filterItems(expression) {
+      const re = new RegExp(expression, 'i');
+      this.filteredGoods = this.goods.filter(item => re.test(item.title));
+    },
     addToCart(id) {
       const checkItem = this.cart.find(item => item.productId === id);
       if (!checkItem) {
@@ -65,6 +69,9 @@ const app = new Vue({
     },
     onCartButtonClick() {
       document.querySelector('.cart__wrapper').classList.toggle('cart__wrapper--closed');
+    },
+    onSearchButtonClick() {
+      this.filterItems(this.searchLine);
     }
   },
   mounted() {
