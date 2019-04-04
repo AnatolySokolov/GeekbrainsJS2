@@ -9,22 +9,60 @@
   <title>eShop</title>
 </head>
 <body>
-<header>
-  <div class="cart__container">
-    <button class="cart-button" type="button">Корзина</button>
-    <div class="cart__wrapper">
-      <ul class="cart__list"></ul>
-      <button class="cart__clear" id="clear-cart" type="button">Отчистить корзину</button>
-    </div>
-  </div>
-</header>
-<main>
-  <h2>Каталог товаров</h2>
-  <ul class="product__list"></ul>
-</main>
 
+<div id="app">
+  <header>
+    <div class="search">
+      <input name="search-text" type="text" v-model="searchLine">
+      <button type="button" v-on:click="onSearchButtonClick">Поиск</button>
+    </div>
+    <div class="cart__container">
+      <button class="cart-button" type="button" v-on:click="onCartButtonClick">Корзина</button>
+      <div class="cart__wrapper" v-if="cart.length != 0">
+        <ul class="cart__list" v-on:click="onDeleteButtonClick">
+          <li class="cart__item" v-for="item in cart">
+            <a class="cart__link" href="#">
+              <div>
+                <h3 class="cart__title">{{item.title}}</h3>
+                <div class="cart__rating"></div>
+                <p class="cart__quantity-and-price">
+                  <span>1</span>
+                  <span class="cart__letter-decoration"> x </span>
+                  <span>$ {{item.price}}</span>
+                </p>
+              </div>
+              <img class="cart__img" :src="item.imgUrl" width="72" height="85" alt="#">
+            </a>
+            <button class="cart__delete" :data-product-id="item.productId" type="button">
+              <span class="visually-hidden">Delete the item from cart</span>
+            </button>
+          </li>
+        </ul>
+        <p>Итого: {{countTotalCost()}}</p>
+        <button class="cart__clear" type="button" v-on:click="clearCart">Отчистить корзину</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <h2>Каталог товаров</h2>
+    <ul class="product__list" v-if="filteredGoods.length != 0" v-on:click="onAddToCartButtonClick">
+      <li class="product__item item-card" v-for="good in filteredGoods">
+        <a class="item-card__link" href="#">
+          <h3 class="item-card__item-title">{{good.title}}</h3>
+          <p class="item-card__price">{{good.price}}</p>
+          <p class="item-card__stars"></p>
+          <img class="item-card__img" :src="good.imgUrl" width="263" height="281" alt="mango people t-shirt">
+        </a>
+        <button class="item-card__cart" :data-product-id="good.productId" type="button">
+          <span class="item-card__cart-text">Add to Cart</span>
+        </button>
+      </li>
+    </ul>
+    <p v-else>Нет данных</p>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 <script src="main.js"></script>
-<script src="onCartButtonClick.js"></script>
-<!--<script src="task3.js"></script>-->
 </body>
 </html>
