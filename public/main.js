@@ -1,5 +1,7 @@
 const DATA_URL = 'data';
 
+// const eventEmitter = new Vue();
+
 Vue.component('product-item', {
   props: ['good'],
   template: `
@@ -24,6 +26,25 @@ Vue.component('product-list', {
     <product-item v-for="good in goods" :good="good"></product-item>
   </ul>  
   `
+});
+
+Vue.component('search', {
+  template: `
+    <div class="search">
+      <input type="text" v-model="searchLine">
+      <button type="button" @click="onSearchButtonClick">Поиск</button> 
+    </div>    
+  `,
+  data() {
+    return {
+      searchLine: ''
+    };
+  },
+  methods: {
+    onSearchButtonClick() {
+      app.filterItems(this.searchLine);
+    }
+  }
 });
 
 const app = new Vue({
