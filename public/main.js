@@ -1,7 +1,5 @@
 const DATA_URL = 'data';
 
-// const eventEmitter = new Vue();
-
 Vue.component('product-item', {
   props: ['good'],
   template: `
@@ -23,7 +21,7 @@ Vue.component('product-list', {
   props: ['goods'],
   template: `
   <ul class="product__list">
-    <product-item v-for="good in goods" :good="good"></product-item>
+    <product-item v-for="good in goods" :good="good" :key="good.productId"></product-item>
   </ul>  
   `
 });
@@ -52,7 +50,6 @@ const app = new Vue({
   data: {
     goods: [],
     filteredGoods: [],
-    searchLine: '',
     cart: []
   },
   methods: {
@@ -114,9 +111,6 @@ const app = new Vue({
     },
     onCartButtonClick() {
       document.querySelector('.cart__wrapper').classList.toggle('cart__wrapper--closed');
-    },
-    onSearchButtonClick() {
-      this.filterItems(this.searchLine);
     }
   },
   mounted() {
