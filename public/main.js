@@ -1,6 +1,30 @@
-'use strict';
-
 const DATA_URL = 'data';
+
+Vue.component('product-item', {
+  props: ['good'],
+  template: `
+    <li class="product__item item-card">
+      <a class="item-card__link" href="#">
+        <h3 class="item-card__item-title">{{good.title}}</h3>
+        <p class="item-card__price">{{good.price}}</p>
+        <p class="item-card__stars"></p>
+        <img class="item-card__img" :src="good.imgUrl" width="263" height="281" alt="mango people t-shirt">
+      </a>
+      <button class="item-card__cart" :data-product-id="good.productId" type="button">
+        <span class="item-card__cart-text">Add to Cart</span>
+      </button>
+    </li>
+  `
+});
+
+Vue.component('product-list', {
+  props: ['goods'],
+  template: `
+  <ul class="product__list">
+    <product-item v-for="good in goods" :good="good"></product-item>
+  </ul>  
+  `
+});
 
 const app = new Vue({
   el: '#app',
