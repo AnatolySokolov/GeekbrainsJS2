@@ -1,5 +1,7 @@
 Vue.component('product-item', {
-  props: ['good'],
+  props: {
+    good: Object
+  },
   template: `
     <li class="product__item item-card">
       <a class="item-card__link" href="#">
@@ -50,8 +52,35 @@ Vue.component('product-list', {
         this.goods = goods;
         this.filteredGoods = goods;
       });
+  },
+  created() {
+    eventEmitter.$on('transmitDataFromSearchLine', query => {
+      const regExp = new RegExp(query, 'i');
+      this.filteredGoods = this.goods.filter(item => regExp.test(item.title));
+    });
   }
 });
+
+Vue.component('search-component', {
+  template: `
+    <div class="search">
+      <input type="text" v-model="searchLine">
+      <button type="button" @click="onSearchButtonClick">Поиск</button>
+    </div>
+  `,
+  data() {
+    return {
+      searchLine: ''
+    };
+  },
+  methods: {
+    onSearchButtonClick() {
+      eventEmitter.$emit('transmitDataFromSearchLine', this.searchLine);
+    }
+  }
+});
+
+const eventEmitter = new Vue();
 
 const app = new Vue({
   el: '#app'
