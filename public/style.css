@@ -137,7 +137,9 @@ header {
   cursor: pointer;
 }
 
-.cart__clear {
+.cart__button {
+  margin-bottom: 10px;
+
   cursor: pointer;
 }
 
