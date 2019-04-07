@@ -11,13 +11,10 @@
 <body>
 
 <div id="app">
-  <header>
-    <search></search>
-  </header>
+  <header></header>
   <main>
     <h2>Каталог товаров</h2>
-    <product-list :goods="filteredGoods" v-if="filteredGoods.length != 0"></product-list>
-    <p v-else>Нет данных</p>
+    <product-list></product-list>
   </main>
 </div>
 

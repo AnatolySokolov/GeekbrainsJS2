@@ -1,5 +1,3 @@
-const DATA_URL = 'data';
-
 Vue.component('product-item', {
   props: ['good'],
   template: `
@@ -10,7 +8,7 @@ Vue.component('product-item', {
         <p class="item-card__stars"></p>
         <img class="item-card__img" :src="good.imgUrl" width="263" height="281" alt="mango people t-shirt">
       </a>
-      <button class="item-card__cart" :data-product-id="good.productId" type="button">
+      <button class="item-card__cart" type="button" :data-product-id="good.productId">
         <span class="item-card__cart-text">Add to Cart</span>
       </button>
     </li>
@@ -18,39 +16,20 @@ Vue.component('product-item', {
 });
 
 Vue.component('product-list', {
-  props: ['goods'],
   template: `
-  <ul class="product__list">
-    <product-item v-for="good in goods" :good="good" :key="good.productId"></product-item>
-  </ul>  
-  `
-});
-
-Vue.component('search', {
-  template: `
-    <div class="search">
-      <input type="text" v-model="searchLine">
-      <button type="button" @click="onSearchButtonClick">Поиск</button> 
-    </div>    
+    <div>
+      <ul class="product__list" v-if="filteredGoods.length != 0">
+        <product-item v-for="good in filteredGoods" :good="good" :key="good.productId"></product-item>
+      </ul>
+      <p v-else>Нет данных</p> 
+    </div>
   `,
   data() {
     return {
-      searchLine: ''
+      DATA_URL: 'data',
+      goods: [],
+      filteredGoods: [],
     };
-  },
-  methods: {
-    onSearchButtonClick() {
-      app.filterItems(this.searchLine);
-    }
-  }
-});
-
-const app = new Vue({
-  el: '#app',
-  data: {
-    goods: [],
-    filteredGoods: [],
-    cart: []
   },
   methods: {
     sendRequest(url) {
@@ -63,60 +42,17 @@ const app = new Vue({
             throw new Error('Network response was not ok.');
           })
         .catch(error => console.log(error.message));
-    },
-    filterItems(expression) {
-      const re = new RegExp(expression, 'i');
-      this.filteredGoods = this.goods.filter(item => re.test(item.title));
-    },
-    addToCart(id) {
-      const checkItem = this.cart.find(item => item.productId === id);
-      if (!checkItem) {
-        this.filteredGoods.find(item => {
-          if (item.productId === id) {
-            this.cart.push(item);
-          }
-        });
-      }
-    },
-    removeFromCart(id) {
-      this.cart.some((item, index) => {
-        if (item.productId === id) {
-          this.cart.splice(index, 1);
-        }
-      });
-    },
-    clearCart() {
-      this.cart = [];
-    },
-    countTotalCost() {
-      return this.cart.reduce((acc, item) => acc + item.price, 0);
-    },
-    onAddToCartButtonClick(e) {
-      let id;
-
-      if (e.target.classList.contains('item-card__cart')) {
-        id = e.target.dataset.productId;
-      } else if (e.target.classList.contains('item-card__cart-text')) {
-        id = e.target.parentElement.dataset.productId;
-      }
-      if (id) {
-        this.addToCart(id);
-      }
-    },
-    onDeleteButtonClick(e) {
-      if (e.target.classList.contains('cart__delete')) {
-        const id = e.target.dataset.productId;
-        this.removeFromCart(id);
-      }
-    },
-    onCartButtonClick() {
-      document.querySelector('.cart__wrapper').classList.toggle('cart__wrapper--closed');
     }
   },
   mounted() {
-    this.sendRequest(DATA_URL).then(goods => {
-      this.goods = goods;
-      this.filteredGoods = goods;
-    });
+    this.sendRequest(this.DATA_URL)
+      .then(goods => {
+        this.goods = goods;
+        this.filteredGoods = goods;
+      });
   }
+});
+
+const app = new Vue({
+  el: '#app'
 });
