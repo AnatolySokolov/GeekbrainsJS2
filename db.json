@@ -4,55 +4,64 @@
       "productId": "1",
       "title": "mango people t-shirt1",
       "price": 10,
-      "imgUrl": "img/product__img1.jpg"
+      "imgUrl": "img/product__img1.jpg",
+      "quantity": 1
     },
     {
       "productId": "2",
       "title": "mango people t-shirt2",
       "price": 20,
-      "imgUrl": "img/product__img2.jpg"
+      "imgUrl": "img/product__img2.jpg",
+      "quantity": 1
     },
     {
       "productId": "3",
       "title": "mango people t-shirt3",
       "price": 30,
-      "imgUrl": "img/product__img3.jpg"
+      "imgUrl": "img/product__img3.jpg",
+      "quantity": 1
     },
     {
       "productId": "4",
       "title": "mango people t-shirt4",
       "price": 40,
-      "imgUrl": "img/product__img4.jpg"
+      "imgUrl": "img/product__img4.jpg",
+      "quantity": 1
     },
     {
       "productId": "5",
       "title": "mango people t-shirt5",
       "price": 50,
-      "imgUrl": "img/product__img5.jpg"
+      "imgUrl": "img/product__img5.jpg",
+      "quantity": 1
     },
     {
       "productId": "6",
       "title": "mango people t-shirt6",
       "price": 60,
-      "imgUrl": "img/product__img6.jpg"
+      "imgUrl": "img/product__img6.jpg",
+      "quantity": 1
     },
     {
       "productId": "7",
       "title": "mango people t-shirt7",
       "price": 70,
-      "imgUrl": "img/product__img7.jpg"
+      "imgUrl": "img/product__img7.jpg",
+      "quantity": 1
     },
     {
       "productId": "8",
       "title": "mango people t-shirt8",
       "price": 80,
-      "imgUrl": "img/product__img8.jpg"
+      "imgUrl": "img/product__img8.jpg",
+      "quantity": 1
     },
     {
       "productId": "9",
       "title": "mango people t-shirt9",
       "price": 90,
-      "imgUrl": "img/product__img9.jpg"
+      "imgUrl": "img/product__img9.jpg",
+      "quantity": 1
     }
   ],
   "cart": [],
