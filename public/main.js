@@ -8,8 +8,7 @@ const sendRequest = url => {
           return response.json();
         }
         throw new Error('Network response was not ok.');
-      })
-    .catch(error => console.log(error.message));
+      });
 };
 
 Vue.component('product-item', {
@@ -39,7 +38,7 @@ Vue.component('product-item', {
 Vue.component('product-list', {
   template: `
     <div>
-      <ul class="product__list" v-if="filteredGoods.length != 0">
+      <ul class="product__list" v-if="filteredGoods.length !== 0">
         <product-item v-for="good in filteredGoods" :good="good" :key="good.productId"></product-item>
       </ul>
       <p v-else>Нет данных</p> 
@@ -57,6 +56,9 @@ Vue.component('product-list', {
       .then(goods => {
         this.goods = goods;
         this.filteredGoods = goods;
+      })
+      .catch(error => {
+        eventEmitter.$emit('transmitErrorData', error);
       });
   },
   created() {
@@ -163,7 +165,10 @@ Vue.component('cart-component', {
   },
   mounted() {
     sendRequest(this.CART_URL)
-      .then(goods => this.cart = goods);
+      .then(goods => this.cart = goods)
+      .catch(error => {
+        eventEmitter.$emit('transmitErrorData', error);
+      });
   },
   created() {
     eventEmitter.$on('transmitItemFromProductItem', item => {
@@ -173,6 +178,31 @@ Vue.component('cart-component', {
         item.quantity++;
       }
     });
+  }
+});
+
+Vue.component('error-component', {
+  template: `
+    <div class="error" :class="{active: isActive}">
+      <p class="error-message">{{message}}</p>
+    </div>
+  `,
+  created() {
+    eventEmitter.$on('transmitErrorData', error => {
+      this.isActive = true;
+      this.message = error.message;
+
+      setTimeout(() => {
+        this.message = '';
+        this.isActive = false;
+      }, 5000);
+    });
+  },
+  data() {
+    return {
+      message: '',
+      isActive: false
+    };
   }
 });
 

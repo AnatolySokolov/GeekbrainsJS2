@@ -242,3 +242,29 @@ header {
   transform: translateX(-50%);
   cursor: pointer;
 }
+
+.error {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  display: none;
+
+  background-color: #dddddd;
+
+  border-radius: 15px;
+
+  transform: translate(-50%, -50%);
+}
+
+.active {
+  display: block;
+}
+
+.error-message {
+  padding: 0 20px;
+
+  font-size: 25px;
+  line-height: 30px;
+  color: red;
+}
