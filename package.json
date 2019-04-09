@@ -1,0 +1,24 @@
+{
+  "name": "geekbrainsjs2",
+  "version": "1.0.0",
+  "description": "Учебный репозиторий портала geekbrains по курсу продвинутый javascript",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnatolySokolov/GeekbrainsJS2.git"
+  },
+  "keywords": [],
+  "author": "Anatoly Sokolov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnatolySokolov/GeekbrainsJS2/issues"
+  },
+  "homepage": "https://github.com/AnatolySokolov/GeekbrainsJS2#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}

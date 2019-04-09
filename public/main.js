@@ -57,9 +57,7 @@ Vue.component('product-list', {
         this.goods = goods;
         this.filteredGoods = goods;
       })
-      .catch(error => {
-        eventEmitter.$emit('transmitErrorData', error);
-      });
+      .catch(error => eventEmitter.$emit('transmitErrorData', error));
   },
   created() {
     eventEmitter.$on('transmitDataFromSearchComponent', query => {
@@ -166,9 +164,7 @@ Vue.component('cart-component', {
   mounted() {
     sendRequest(this.CART_URL)
       .then(goods => this.cart = goods)
-      .catch(error => {
-        eventEmitter.$emit('transmitErrorData', error);
-      });
+      .catch(error => eventEmitter.$emit('transmitErrorData', error));
   },
   created() {
     eventEmitter.$on('transmitItemFromProductItem', item => {
