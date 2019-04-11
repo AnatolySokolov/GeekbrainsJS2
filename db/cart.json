@@ -1,0 +1,16 @@
+[
+  {
+    "productId": "1",
+    "title": "mango people t-shirt1",
+    "price": 10,
+    "imgUrl": "img/product__img1.jpg",
+    "quantity": 1
+  },
+  {
+    "productId": "2",
+    "title": "mango people t-shirt2",
+    "price": 20,
+    "imgUrl": "img/product__img2.jpg",
+    "quantity": 3
+  }
+]

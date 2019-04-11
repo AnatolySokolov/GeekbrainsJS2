@@ -2,3 +2,5 @@
 .idea
 *.log
 *.sublime*
+node_modules/
+npm-debug.*

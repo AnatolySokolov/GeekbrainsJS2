@@ -46,7 +46,7 @@ Vue.component('product-list', {
   `,
   data() {
     return {
-      DATA_URL: 'data',
+      DATA_URL: 'products',
       goods: [],
       filteredGoods: [],
     };
@@ -57,9 +57,7 @@ Vue.component('product-list', {
         this.goods = goods;
         this.filteredGoods = goods;
       })
-      .catch(error => {
-        eventEmitter.$emit('transmitErrorData', error);
-      });
+      .catch(error => eventEmitter.$emit('transmitErrorData', error));
   },
   created() {
     eventEmitter.$on('transmitDataFromSearchComponent', query => {
@@ -126,7 +124,7 @@ Vue.component('cart-component', {
           <cart-item v-for="item in cart" :item="item" :key="item.productId" @onDelButtonClick="removeItem"></cart-item>
         </ul>
         <p>Итого: {{countTotalCost()}}</p>
-        <button class="cart__button" type="button" @click="sendCart">Отправить на сервер</button>
+        <button class="cart__button" type="button" @click="sendCart">Купить</button>
         <button class="cart__button" type="button" @click="clearCart">Отчистить корзину</button>
       </div>
     </div>
@@ -147,36 +145,35 @@ Vue.component('cart-component', {
     },
     clearCart() {
       this.cart = [];
+      this.sendCart();
       document.querySelector('.cart__wrapper').classList.add('cart__wrapper--closed');
     },
     countTotalCost() {
       return this.cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
     },
     sendCart() {
-      // неправильно работает. поправить
-      // fetch(this.CART_URL, {
-      //   method: 'post',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify(this.cart)
-      // });
+      fetch(this.CART_URL, {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.cart)
+      });
     }
   },
   mounted() {
     sendRequest(this.CART_URL)
       .then(goods => this.cart = goods)
-      .catch(error => {
-        eventEmitter.$emit('transmitErrorData', error);
-      });
+      .catch(error => eventEmitter.$emit('transmitErrorData', error));
   },
   created() {
     eventEmitter.$on('transmitItemFromProductItem', item => {
-      if (this.cart.indexOf(item) === -1) {
-        this.cart.push(item);
-      } else {
-        item.quantity++;
+      const cartItem = this.cart.find(el => el.productId === item.productId);
+
+      if (cartItem) {
+        return cartItem.quantity++;
       }
+      this.cart.push(item);
     });
   }
 });
